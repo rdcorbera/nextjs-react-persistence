@@ -2,7 +2,12 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link';
 
+import { useRequest } from '../hooks/useRequest';
+
 export default function Home() {
+
+  const { data, error } = useRequest('users/' + 1);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -18,6 +23,11 @@ export default function Home() {
         <Link href="/">
           <a>Home</a>
         </Link>
+        {data &&
+          <div>
+            User name: {data.name}
+          </div>
+        }
       </main>
     </div>
   )
